@@ -80,6 +80,7 @@ namespace SharpMove
                         casplit[0] = cmdpath.Substring(slh);
                         casplit[0] = casplit[0].Replace("\\", "");
                         casplit[1] = cmdarg;
+			cmdpath = cmdpath.Replace("\\" + casplit[0], "");
                     }
                     else
                     {
